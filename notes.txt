@@ -1,0 +1,32 @@
+$ rails new demo_app
+
+$Modify Gemfile
+
+$bundle install --without production
+$bundle update
+$bundle install
+
+$ git init
+$ git add .
+$ git commit -m "Initial commit"
+$ git remote add origin https://github.com/<username>/demo_app.git
+$ git push -u origin master
+
+
+$ rails generate scaffold User name:string email:string
+$ bundle exec rake db:migrate
+$ rails generate scaffold Micropost content:string user_id:integer
+$ bundle exec rake db:migrate
+
+class User < ActiveRecord::Base
+  has_many :microposts
+end
+
+class Micropost < ActiveRecord::Base
+  belongs_to :user
+  validates :content, length: { maximum: 140 }
+end
+
+$ git add .
+$ git commit -m "Finish demo app"
+$ git push
